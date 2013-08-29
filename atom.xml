@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[神羲龛]]></title>
   <link href="http://lieyunye.github.io/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2013-08-29T13:30:44+08:00</updated>
+  <updated>2013-08-29T14:05:42+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[lieyunye]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[who you are]]></title>
+    <title type="html"><![CDATA[裂云野]]></title>
     <link href="http://lieyunye.github.io/blog/2013/08/29/who-you-are/"/>
     <updated>2013-08-29T13:30:00+08:00</updated>
     <id>http://lieyunye.github.io/blog/2013/08/29/who-you-are</id>
