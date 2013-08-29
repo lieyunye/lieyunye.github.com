@@ -6,3 +6,4 @@ comments: true
 categories: 
 ---
    裂云野是谁啊？
+   {% img/images/dog.jpg %}
