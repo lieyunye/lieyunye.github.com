@@ -17,7 +17,7 @@ categories:
 
   * git
   
-  	将git安装好，有git-hub的账号,对git做一些基本配置，比如:remote.origin.url = https://github.com/username/username.github.com.git,这样git push origin source 才不会出错
+  	将git安装好，有git-hub的账号,对git做一些基本配置，比如:remote.origin.url = https://github.com/username/username.github.com.git ， 这样git push origin source 才不会出错
   * 安装ruby和rvm
   
   	记得安装好相关依赖项，如 bundle
