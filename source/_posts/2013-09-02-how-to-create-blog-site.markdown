@@ -3,7 +3,7 @@ layout: post
 title: "本博客的搭建"
 date: 2013-09-02 19:44
 comments: true
-categories: 
+categories: summary
 ---
 如果有人对git-hub + octopress的博客感兴趣的话，可以读一读下文：
 
@@ -15,15 +15,18 @@ categories:
  
 2、顺利的话，相信你已经搭建成功了，如果出了问题，可以看看下文，梳理一下：
 
-  * git
+  * git  
   
   	将git安装好，有git-hub的账号,对git做一些基本配置，比如:remote.origin.url = https://github.com/username/username.github.com.git ， 这样git push origin source 才不会出错
-  * 安装ruby和rvm
+  	
+  * 安装ruby和rvm 
   
   	记得安装好相关依赖项，如 bundle
+  	
   * 安装octopress
 	
 	生成博客或者是对octopress设置 都要记得 cd your_local_octopress_directory
+	
   	
 ##其他配置
   
