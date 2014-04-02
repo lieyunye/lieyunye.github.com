@@ -28,7 +28,7 @@ categories:
 解决方法：
 
 	在MakeFile中加入  xxx_FRAMEWORKS = UIKit
-	将xxx替换成你的工程的名称，注意第一个字母小写其他均大写
+	将xxx替换成你的TWEAK_NAME
 	
 问题3：
 
