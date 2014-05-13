@@ -261,28 +261,7 @@ Storing debug log for failure in /home/vagrant/.pip/pip.log
 <p>如果遇到：</p>
 
 <pre><code>pip install pylibmc
-Downloading/unpacking pylibmc
-Downloading pylibmc-1.3.0.tar.gz (49kB): 49kB downloaded
-Storing download in cache at /home/op/.pip/cache/https%3A%2F%2Fpypi.python.org  %2Fpackages%2Fsource%2Fp%2Fpylibmc%2Fpylibmc-1.3.0.tar.gz
-Running setup.py (path:/home/op/pyServer/sites/env/yichangxi/build/pylibmc/ setup.py) egg_info for package pylibmc
-
-warning: no files found matching 'LICENSE'
-warning: no files found matching 'runtests.py'
-warning: no files found matching '*.py' under directory 'pylibmc'
-Installing collected packages: pylibmc
-Running setup.py install for pylibmc
-building '_pylibmc' extension
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -    Wstrict-prototypes -fPIC -DUSE_ZLIB -I/usr/local/include/python2.7 -c src/  _pylibmcmodule.c -o build/temp.linux-x86_64-2.7/src/_pylibmcmodule.o -fno-  strict-aliasing
-In file included from src/_pylibmcmodule.c:34:
-src/_pylibmcmodule.h:189: error: ‘MEMCACHED_BEHAVIOR_TCP_KEEPALIVE’ undeclared  here (not in a function)
-src/_pylibmcmodule.h:256: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY’     undeclared here (not in a function)
-src/_pylibmcmodule.h:256: error: initializer element is not constant
-src/_pylibmcmodule.h:256: error: (near initialization for   ‘PylibMC_distributions[3].flag’)
-src/_pylibmcmodule.h:261: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_MAX’    undeclared here (not in a function)
-src/_pylibmcmodule.h:261: error: initializer element is not constant
-src/_pylibmcmodule.h:261: error: (near initialization for   ‘PylibMC_distributions[5].flag’)
-error: command 'gcc' failed with exit status 1
-Complete output from command /home/op/pyServer/sites/env/yichangxi/bin/python - c "import setuptools, tokenize;__file__='/home/op/pyServer/sites/env/yichangxi/ build/pylibmc/setup.py';exec(compile(getattr(tokenize, 'open', open)    (__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --record / tmp/pip-0zWJqI-record/install-record.txt --single-version-externally-managed -- compile --install-headers /home/op/pyServer/sites/env/yichangxi/include/site/   python2.7:
+python2.7:
 running install
 
 running build
