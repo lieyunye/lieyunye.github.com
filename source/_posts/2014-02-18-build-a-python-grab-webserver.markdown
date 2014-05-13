@@ -137,7 +137,109 @@ categories:
 		安装libmemcached 0.32，重新安装pylibmc
 
 
+如果遇到：
 
+		django.core.exceptions.ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named _sqlite3
+		
+解决办法：
+
+	sudo yum install pysqlite
+
+如果遇到：
+	
+	/usr/bin/yum: line 2: import: command not found
+	/usr/bin/yum: line 3: try:: command not found
+	/usr/bin/yum: line 4: import: command not found
+	/usr/bin/yum: line 5: except: command not found
+	/usr/bin/yum: line 23: syntax error near unexpected token `('
+	/usr/bin/yum: line 23: `""" % (sys.exc_value, sys.version)'
+
+解决办法：
+
+	vi /usr/bin/yum
+	第一行修改为 ：#!/usr/bin/python2.6
+	
+如果遇到：
+
+	pip install pylibmc
+	Downloading/unpacking pylibmc
+  	Downloading pylibmc-1.3.0.tar.gz (49kB): 49kB downloaded
+  	Storing download in cache at /home/op/.pip/cache/https%3A%2F%2Fpypi.python.org	%2Fpackages%2Fsource%2Fp%2Fpylibmc%2Fpylibmc-1.3.0.tar.gz
+  	Running setup.py (path:/home/op/pyServer/sites/env/yichangxi/build/pylibmc/	setup.py) egg_info for package pylibmc
+    
+    warning: no files found matching 'LICENSE'
+    warning: no files found matching 'runtests.py'
+    warning: no files found matching '*.py' under directory 'pylibmc'
+	Installing collected packages: pylibmc
+  	Running setup.py install for pylibmc
+    building '_pylibmc' extension
+    gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -	Wstrict-prototypes -fPIC -DUSE_ZLIB -I/usr/local/include/python2.7 -c src/	_pylibmcmodule.c -o build/temp.linux-x86_64-2.7/src/_pylibmcmodule.o -fno-	strict-aliasing
+    In file included from src/_pylibmcmodule.c:34:
+    src/_pylibmcmodule.h:189: error: ‘MEMCACHED_BEHAVIOR_TCP_KEEPALIVE’ undeclared 	here (not in a function)
+    src/_pylibmcmodule.h:256: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY’ 	undeclared here (not in a function)
+    src/_pylibmcmodule.h:256: error: initializer element is not constant
+    src/_pylibmcmodule.h:256: error: (near initialization for 	‘PylibMC_distributions[3].flag’)
+    src/_pylibmcmodule.h:261: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_MAX’ 	undeclared here (not in a function)
+    src/_pylibmcmodule.h:261: error: initializer element is not constant
+    src/_pylibmcmodule.h:261: error: (near initialization for 	‘PylibMC_distributions[5].flag’)
+    error: command 'gcc' failed with exit status 1
+    Complete output from command /home/op/pyServer/sites/env/yichangxi/bin/python -	c "import setuptools, tokenize;__file__='/home/op/pyServer/sites/env/yichangxi/	build/pylibmc/setup.py';exec(compile(getattr(tokenize, 'open', open)	(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --record /	tmp/pip-0zWJqI-record/install-record.txt --single-version-externally-managed --	compile --install-headers /home/op/pyServer/sites/env/yichangxi/include/site/	python2.7:
+    running install
+
+	running build
+
+	running build_py
+
+	creating build
+
+	creating build/lib.linux-x86_64-2.7
+
+	creating build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/test.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/consts.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/__main__.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/pools.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/__init__.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	copying src/pylibmc/client.py -> build/lib.linux-x86_64-2.7/pylibmc
+
+	running build_ext
+
+	building '_pylibmc' extension
+
+	creating build/temp.linux-x86_64-2.7
+
+	creating build/temp.linux-x86_64-2.7/src
+
+	gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DUSE_ZLIB -I/usr/local/include/python2.7 -c src/_pylibmcmodule.c -o build/temp.linux-x86_64-2.7/src/_pylibmcmodule.o -fno-strict-aliasing
+
+	In file included from src/_pylibmcmodule.c:34:
+
+	src/_pylibmcmodule.h:189: error: ‘MEMCACHED_BEHAVIOR_TCP_KEEPALIVE’ undeclared here (not in a function)
+
+	src/_pylibmcmodule.h:256: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY’ undeclared here (not in a function)
+
+	src/_pylibmcmodule.h:256: error: initializer element is not constant
+
+	src/_pylibmcmodule.h:256: error: (near initialization for ‘PylibMC_distributions[3].flag’)
+
+	src/_pylibmcmodule.h:261: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_MAX’ undeclared here (not in a function)
+
+	src/_pylibmcmodule.h:261: error: initializer element is not constant
+
+	src/_pylibmcmodule.h:261: error: (near initialization for ‘PylibMC_distributions[5].flag’)
+
+	error: command 'gcc' failed with exit status 1
+
+解决办法：
+
+	这个错误的出现是因为libmemcached的版本与pylibmc的版本不匹配造成的，所以安装相对应的libmemcached与pylibmc即可
+	
 未完待续~
 
 
