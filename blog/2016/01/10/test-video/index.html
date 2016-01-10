@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>解决IOS状态栏高度变化对View的影响 - 神羲龛</title>
+  <title>test_video - 神羲龛</title>
   <meta name="author" content="lieyunye">
 
   
-  <meta name="description" content="在IOS应用中会遇到状态栏高度的变化，比如手机来电话和手机设置热点。
-这时statusBarFrame.size.height=40;并且self.view回整体向下偏移20的高度，如果程序界面中的底部有一些视图是根据self.view.frame.size.height来设置位置的， &hellip;">
+  <meta name="description" content=" &lt;source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4"&gt; ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lieyunye.github.io/blog/2014/03/23/resize-view-when-statusbarframe-changed">
+  <link rel="canonical" href="http://lieyunye.github.io/blog/2016/01/10/test-video">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="神羲龛" type="application/atom+xml">
@@ -70,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">解决IOS状态栏高度变化对View的影响</h1>
+      <h1 class="entry-title">Test_video</h1>
     
     
       <p class="meta">
@@ -86,22 +85,19 @@
   
 
 
-<time datetime="2014-03-23T16:02:00+08:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+<time datetime="2016-01-10T13:46:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>在IOS应用中会遇到状态栏高度的变化，比如手机来电话和手机设置热点。
-这时statusBarFrame.size.height=40;并且self.view回整体向下偏移20的高度，如果程序界面中的底部有一些视图是根据self.view.frame.size.height来设置位置的，那么就会被遮挡，这真悲剧。</p>
+<div class="entry-content"><p><video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png"></p>
 
-<p>UIApplicationWillChangeStatusBarFrameNotification是用来通知状态栏的改变，据此便可以相应调整视图的位置</p>
+<pre><code>  &lt;source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4"&gt;
+</code></pre>
 
-<p>如果在statusBarFrame变化之前对self.view的transform做了改变，那么此时self.view.frame不再是（0，0，320，568）
-因为view.frame是根据view.bounds和view.center来确定的，所以可以由此来重新调整self.view.frame</p>
-
-<p>OK，做个标记，到此为止吧</p>
+<p></video></p>
 </div>
 
 
@@ -124,7 +120,7 @@
   
 
 
-<time datetime="2014-03-23T16:02:00+08:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+<time datetime="2016-01-10T13:46:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2016</time>
       
 
 
@@ -168,10 +164,8 @@ var jiathis_config = {data_track_clickback:'true'};
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/18/build-a-python-grab-webserver/" title="Previous Post: 搭建一个网页抓取服务">&laquo; 搭建一个网页抓取服务</a>
+        <a class="basic-alignment left" href="/blog/2014/04/02/some-problems-and-solutions-in-building-the-first-tweak/" title="Previous Post: 创建Tweak时遇到的问题及其解决方法">&laquo; 创建Tweak时遇到的问题及其解决方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/02/some-problems-and-solutions-in-building-the-first-tweak/" title="Next Post: 创建Tweak时遇到的问题及其解决方法">创建Tweak时遇到的问题及其解决方法 &raquo;</a>
       
     </p>
   </footer>
