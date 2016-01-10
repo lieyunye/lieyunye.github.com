@@ -4,7 +4,7 @@
   <title><![CDATA[神羲龛]]></title>
   <link href="http://lieyunye.github.io/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2016-01-10T15:52:59+08:00</updated>
+  <updated>2016-01-10T16:18:38+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
     <name><![CDATA[lieyunye]]></name>
@@ -18,7 +18,7 @@
     <link href="http://lieyunye.github.io/blog/2016/01/10/test-video/"/>
     <updated>2016-01-10T13:46:00+08:00</updated>
     <id>http://lieyunye.github.io/blog/2016/01/10/test-video</id>
-    <content type="html"><![CDATA[<p><video width='1280' height='720' preload='none' controls poster='http://s3.imathis.com/video/zero-to-fancy-buttons.png'><source src='http://pan.baidu.com/yun-static/common/thirdparty/flashVideo/player/DiskPlayer.swf?t=1451036650829' ></video></p>
+    <content type="html"><![CDATA[<p><video width='1280' height='720' preload='none' controls poster='http://s3.imathis.com/video/zero-to-fancy-buttons.png'><source src='https://raw.githubusercontent.com/lieyunye/lieyunye/master/record.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video></p>
 ]]></content>
   </entry>
   
