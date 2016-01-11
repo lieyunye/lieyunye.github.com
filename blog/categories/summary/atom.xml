@@ -4,7 +4,7 @@
   <title><![CDATA[Category: summary | 神羲龛]]></title>
   <link href="http://lieyunye.github.io/blog/categories/summary/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2016-01-11T13:28:31+08:00</updated>
+  <updated>2016-01-11T13:33:37+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
     <name><![CDATA[lieyunye]]></name>
@@ -59,15 +59,11 @@
     });
 &lt;/script&gt;
 下载[Audio/MP3 Plugin for Octopress](https://gist.github.com/lieyunye/409b6c76f5d9dc4d7a5b)将其放在/plugins目录下
-最后编辑xxx.markdown 加入<p/>
-<center>
-<audio src="http://7xpydv.com1.z0.glb.clouddn.com/audio%2Fpiano%2F%E5%92%8C%E7%94%B0%E8%96%AB%20-%20%E5%93%80%E6%AD%8C.mp3" preload="none" />
-</center>
-<p/> 即可
+最后编辑xxx.markdown 加入<img src="/images/audio.png"> 即可
 </code></pre></li>
 <li><p>添加视频</p>
 
-<pre><code>示例：<video width='1280' height='720' preload='none' controls poster='http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png'><source src='http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video>
+<pre><code><img src="/images/video.png">
 </code></pre></li>
 <li><p>导航栏的配置</p>
 
