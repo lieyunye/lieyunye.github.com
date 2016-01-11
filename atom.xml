@@ -4,7 +4,7 @@
   <title><![CDATA[神羲龛]]></title>
   <link href="http://lieyunye.github.io/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2016-01-11T11:07:57+08:00</updated>
+  <updated>2016-01-11T11:45:26+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
     <name><![CDATA[lieyunye]]></name>
@@ -18,7 +18,13 @@
     <link href="http://lieyunye.github.io/blog/2016/01/11/sad-song/"/>
     <updated>2016-01-11T11:04:00+08:00</updated>
     <id>http://lieyunye.github.io/blog/2016/01/11/sad-song</id>
-    <content type="html"><![CDATA[<p><video width='1280' height='720' preload='none' controls poster='http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png'><source src='http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video></p>
+    <content type="html"><![CDATA[<p><p/>
+<center>
+<audio src="http://7xpydv.com1.z0.glb.clouddn.com/audio%2Fpiano%2F%E5%92%8C%E7%94%B0%E8%96%AB%20-%20%E5%93%80%E6%AD%8C.mp3" preload="none" />
+</center>
+<p/></p>
+
+<p><video width='1280' height='720' preload='none' controls poster='http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png'><source src='http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video></p>
 
 <p><a href="http://www.tan8.com/yuepu-10123.html">曲谱地址</a></p>
 ]]></content>
