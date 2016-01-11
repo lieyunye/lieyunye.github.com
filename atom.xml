@@ -4,7 +4,7 @@
   <title><![CDATA[神羲龛]]></title>
   <link href="http://lieyunye.github.io/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2016-01-11T13:33:37+08:00</updated>
+  <updated>2016-01-11T13:35:11+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
     <name><![CDATA[lieyunye]]></name>
@@ -644,12 +644,13 @@ Instructions: 0x00097490: CFA=4294967295+4294967295
     });
 &lt;/script&gt;
 下载[Audio/MP3 Plugin for Octopress](https://gist.github.com/lieyunye/409b6c76f5d9dc4d7a5b)将其放在/plugins目录下
-最后编辑xxx.markdown 加入&lt;img src="http://lieyunye.github.io/images/audio.png"&gt; 即可
-</code></pre></li>
+最后编辑xxx.markdown 加入
+</code></pre>
+
+<p><img src="http://lieyunye.github.io/images/audio.png"></p></li>
 <li><p>添加视频</p>
 
-<pre><code>&lt;img src="http://lieyunye.github.io/images/video.png"&gt;
-</code></pre></li>
+<p><img src="http://lieyunye.github.io/images/video.png"></p></li>
 <li><p>导航栏的配置</p>
 
 <pre><code>cd source/_includes/custom
