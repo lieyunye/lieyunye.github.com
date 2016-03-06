@@ -1,0 +1,18 @@
+---
+layout: post
+title: "哀歌"
+date: 2016-01-11 11:04
+comments: true
+categories: 
+---
+
+* 原作试听
+
+	{% audio http://7xpydv.com1.z0.glb.clouddn.com/audio%2Fpiano%2F%E5%92%8C%E7%94%B0%E8%96%AB%20-%20%E5%93%80%E6%AD%8C.mp3 %}
+	
+
+
+
+{% video http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4 1280 720 http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png %}
+
+[曲谱地址](http://www.tan8.com/yuepu-10123.html)

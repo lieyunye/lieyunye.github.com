@@ -29,6 +29,21 @@ categories: summary
 	
   	
 ##其他配置
+
+  * 添加音频
+  
+  		下载[audio.js](http://kolber.github.io/audiojs/)
+  		将其中的audio.min.js和player-graphics.gif拷贝到/source/javascripts目录下
+  		编辑/source/_includes/head.html,加入如下代码：
+  		<script src="{{ root_url }}/javascripts/audio.min.js"></script>
+ 		<script>
+   			audiojs.events.ready(function() {
+     		var as = audiojs.createAll();
+   			});
+  		</script>
+  		下载[Audio/MP3 Plugin for Octopress](https://gist.github.com/lieyunye/409b6c76f5d9dc4d7a5b)将其放在/plugins目录下
+  		最后编辑xxx.markdown 加入audio标签
+  		
   
   * 导航栏的配置
   
@@ -50,6 +65,7 @@ categories: summary
 		</p>
   	
   	参见文档：http://octopress.org/docs/theme/template
+  	http://micronarrativ.org/blog/blog/2012/09/06/wordpress-til-octopress-audio/
   
   
   OK,这就是本博客的搭建过程，到此为止吧
