@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>搭建一个网页抓取服务 - 神羲龛</title>
+  <meta name="author" content="lieyunye">
+
+  
+  <meta name="description" content="这是一个基于python的网页抓取服务，主要用到两个第三方库，即PhantomJS和Selenium，当然具体解析网页还需要别的库，之后用到再说。 PhantomJS:是一个基于WebKit的服务器端 JavaScript API。它全面支持web而不需浏览器支持，其快速，原生支持各种Web标准 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lieyunye.github.io/blog/2014/02/18/build-a-python-grab-webserver">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="神羲龛" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">神羲龛</a></h1>
+  
+    <h2>路漫漫其修远兮，到此为止吧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lieyunye.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="http://weibo.com/lieyunye" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">搭建一个网页抓取服务</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-18T11:50:00+08:00" pubdate data-updated="true">Feb 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>这是一个基于python的网页抓取服务，主要用到两个第三方库，即PhantomJS和Selenium，当然具体解析网页还需要别的库，之后用到再说。</p>
+
+<p><a href="http://phantomjs.org/">PhantomJS</a>:是一个基于WebKit的服务器端 JavaScript API。它全面支持web而不需浏览器支持，其快速，原生支持各种Web标准： DOM 处理, CSS 选择器, JSON, Canvas, 和 SVG。PhantomJS可以用于页面自动化，网络监测，网页截屏，以及无界面测试等。</p>
+
+<p><a href="http://docs.seleniumhq.org/">Selenium</a>:是一个自动化web应用程序测试工具,在这里我们使用的是<a href="https://pypi.python.org/pypi/selenium">Python的一个模块</a></p>
+
+<p>我所使用的系统是centos6.5，已安装好python环境，接下来需要安装<a href="https://www.djangoproject.com/">django</a>:一个开放源代码的Web应用框架，由Python写成,采用了MVC的软件设计模式.</p>
+
+<h4>安装Django</h4>
+
+<p>在安装Django之前需要安装两个小工具easy_install和virtualenv</p>
+
+<p>1、easy_install和pip：很多情况下我们都需要给python安装很多的第三方扩展包，安装这些包有点小繁琐，而easy_install和pip可以一键安装，方便又容易。</p>
+
+<pre><code>* sudo python setup.py install
+* which easy_install
+* #/usr/bin/easy_install
+* sudo easy_install pip
+</code></pre>
+
+<p>2、virtualenv和virtualenvwrapper：一种源代码版本管理工具，可以使每个project都有自己独立的虚拟环境。</p>
+
+<pre><code>* sudo easy_install virtualenv virtualenvwrapper
+</code></pre>
+
+<p>安装好<a href="http://www.virtualenv.org/en/latest/index.html">virtualenv</a>和<a href="http://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html">virtualenvwrapper</a>之后，需要配置一下环境，在home目录下打开.bashrc</p>
+
+<pre><code>if [ -f /usr/local/bin/virtualenvwrapper.sh]; then   export VENVWRAP=/usr/local/bin/virtualenvwrapper.sh
+fi
+if [ ! -z $VENVWRAP]; then   [ -d $HOME/sites/env ] || mkdir -p $HOME/sites/env
+      export WORKON_HOME=$HOME/sites/env
+      source $VENVWRAP
+      export VIRTUALENV_USE_DISTRIBUTE=true
+      export PIP_VIRTUALENV_BASE=$WORKON_HOME
+      export PIP_REQUIRE_VIRTUALENV=true
+      export PIP_RESPECT_VIRTUALENV=true
+      export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+fi
+</code></pre>
+
+<p>将以上代码加入.bashrc，然后source .bashrc</p>
+
+<p>以下是在安装过程中可能会遇到的一些问题</p>
+
+<p>如果遇到：</p>
+
+<pre><code>Traceback (most recent call last):
+    File "/usr/bin/easy_install", line 5, in &lt;module&gt;
+    from pkg_resources import load_entry_point
+    File "build/bdist.linux-x86_64/egg/pkg_resources.py", line 2720, in &lt;module&gt;
+    File "build/bdist.linux-x86_64/egg/pkg_resources.py", line 588, in resolve
+    pkg_resources.DistributionNotFound: setuptools==3.0dev
+</code></pre>
+
+<p>解决方法：</p>
+
+<pre><code>wget http://python-distribute.org/distribute_setup.py
+sudo python distribute_setup.py 
+</code></pre>
+
+<p>如果遇到</p>
+
+<pre><code>Traceback (most recent call last):
+File "distribute_setup.py", line 556, in &lt;module&gt;
+sys.exit(main())
+File "distribute_setup.py", line 552, in main
+tarball = download_setuptools(download_base=options.download_base)
+File "distribute_setup.py", line 211, in download_setuptools
+src = urlopen(url)
+File "/usr/local/lib/python2.7/urllib2.py", line 127, in urlopen
+return _opener.open(url, data, timeout)
+File "/usr/local/lib/python2.7/urllib2.py", line 410, in open
+response = meth(req, response)
+File "/usr/local/lib/python2.7/urllib2.py", line 523, in http_response
+'http', request, response, code, msg, hdrs)
+File "/usr/local/lib/python2.7/urllib2.py", line 442, in error
+result = self._call_chain(*args)
+File "/usr/local/lib/python2.7/urllib2.py", line 382, in _call_chain
+result = func(*args)
+File "/usr/local/lib/python2.7/urllib2.py", line 629, in http_error_302
+return self.parent.open(new, timeout=req.timeout)
+File "/usr/local/lib/python2.7/urllib2.py", line 404, in open
+response = self._open(req, data)
+File "/usr/local/lib/python2.7/urllib2.py", line 427, in _open
+'unknown_open', req)
+File "/usr/local/lib/python2.7/urllib2.py", line 382, in _call_chain
+result = func(*args)
+File "/usr/local/lib/python2.7/urllib2.py", line 1247, in unknown_open
+raise URLError('unknown url type: %s' % type)
+urllib2.URLError: &lt;urlopen error unknown url type: https&gt;
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>sudo yum install openssl-devel
+</code></pre>
+
+<p>好了，先创建一个虚拟环境</p>
+
+<pre><code>mkvirtualenv yichangxi
+</code></pre>
+
+<p>创建一个requirements.txt，内容是django</p>
+
+<p><a href="https://www.djangoproject.com/download/">安装Django</a></p>
+
+<pre><code>pip install -r requirements.txt
+</code></pre>
+
+<p>访问localhost:8080就可以看到Django的欢迎页了。</p>
+
+<p>因为我是用vagrant在本机（mac）虚拟的centos，所以为了可以使本地与虚拟的系统中的Django服务进行通信，所以安装了<a href="http://tengine.taobao.org/document_cn/install_cn.html">Tengine</a>.OK</p>
+
+<p>接下来我们需要安装这几个第三方模块，simplepython,BeautifulSoup,selenium,pylibmc.</p>
+
+<p>如果在安装pylibmc时遇到问题：</p>
+
+<pre><code>    Command /home/vagrant/sites/env/xxx/bin/python -c "import setuptools, tokenize;__file__='/home/vagrant/sites/env/xxx/build/pylibmc/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --record /tmp/pip-DvN1EK-record/install-record.txt --single-version-externally-managed --compile --install-headers /home/vagrant/sites/env/xxx/include/site/python2.7 failed with error code 1 in /home/vagrant/sites/env/xxx/build/pylibmc
+Storing debug log for failure in /home/vagrant/.pip/pip.log
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>sudo yum install libmemcached-devel zlib1g-devel libssl-devel python-devel build-essential
+</code></pre>
+
+<p>如果遇到：</p>
+
+<pre><code>    RuntimeError: pylibmc requires &gt;= libmemcached 0.32, was compiled with 0.31
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>    cd /usr/local/lib/
+    ln -s libmemcached.so libmemcached.so.11
+    sudo ldconfig
+    ldconfig -p | grep libmemcached查看一下
+    安装libmemcached 0.32，重新安装pylibmc
+</code></pre>
+
+<p>如果遇到：</p>
+
+<pre><code>    django.core.exceptions.ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named _sqlite3
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>sudo yum install pysqlite
+</code></pre>
+
+<p>如果遇到：</p>
+
+<pre><code>/usr/bin/yum: line 2: import: command not found
+/usr/bin/yum: line 3: try:: command not found
+/usr/bin/yum: line 4: import: command not found
+/usr/bin/yum: line 5: except: command not found
+/usr/bin/yum: line 23: syntax error near unexpected token `('
+/usr/bin/yum: line 23: `""" % (sys.exc_value, sys.version)'
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>vi /usr/bin/yum
+第一行修改为 ：#!/usr/bin/python2.6
+</code></pre>
+
+<p>如果遇到：</p>
+
+<pre><code>pip install pylibmc
+python2.7:
+running install
+
+running build
+
+running build_py
+
+creating build
+
+creating build/lib.linux-x86_64-2.7
+
+creating build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/test.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/consts.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/__main__.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/pools.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/__init__.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+copying src/pylibmc/client.py -&gt; build/lib.linux-x86_64-2.7/pylibmc
+
+running build_ext
+
+building '_pylibmc' extension
+
+creating build/temp.linux-x86_64-2.7
+
+creating build/temp.linux-x86_64-2.7/src
+
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DUSE_ZLIB -I/usr/local/include/python2.7 -c src/_pylibmcmodule.c -o build/temp.linux-x86_64-2.7/src/_pylibmcmodule.o -fno-strict-aliasing
+
+In file included from src/_pylibmcmodule.c:34:
+
+src/_pylibmcmodule.h:189: error: ‘MEMCACHED_BEHAVIOR_TCP_KEEPALIVE’ undeclared here (not in a function)
+
+src/_pylibmcmodule.h:256: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY’ undeclared here (not in a function)
+
+src/_pylibmcmodule.h:256: error: initializer element is not constant
+
+src/_pylibmcmodule.h:256: error: (near initialization for ‘PylibMC_distributions[3].flag’)
+
+src/_pylibmcmodule.h:261: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_MAX’ undeclared here (not in a function)
+
+src/_pylibmcmodule.h:261: error: initializer element is not constant
+
+src/_pylibmcmodule.h:261: error: (near initialization for ‘PylibMC_distributions[5].flag’)
+
+error: command 'gcc' failed with exit status 1
+</code></pre>
+
+<p>解决办法：</p>
+
+<pre><code>这个错误的出现是因为libmemcached的版本与pylibmc的版本不匹配造成的，所以安装相对应的libmemcached与pylibmc即可
+</code></pre>
+
+<p>未完待续~</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">lieyunye</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-18T11:50:00+08:00" pubdate data-updated="true">Feb 18<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_renren">人人网</a>
+
+<a href="http://www.jiathis.com/share?uid=1833681" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1355794876787531" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1833681"></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/13/ios-font-icon/" title="Previous Post: 在IOS应用中使用字体图标">&laquo; 在IOS应用中使用字体图标</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/23/resize-view-when-statusbarframe-changed/" title="Next Post: 解决IOS状态栏高度变化对View的影响">解决IOS状态栏高度变化对View的影响 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>时间如流水</h1>
+  <div id="myTime">
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="160" height="70" id="honehoneclock" align="center"><param name="allowScriptAccess" value="always"><param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="wmode" value="transparent"><embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="center" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object>
+  </div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/test-video/">Test_video</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/02/some-problems-and-solutions-in-building-the-first-tweak/">创建Tweak时遇到的问题及其解决方法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/23/resize-view-when-statusbarframe-changed/">解决IOS状态栏高度变化对View的影响</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/18/build-a-python-grab-webserver/">搭建一个网页抓取服务</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/13/ios-font-icon/">在IOS应用中使用字体图标</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>爱帮网(2011---2012)<br/>
+     九九房(2012---至今)</p>
+	<br/>Java 开发工程师，曾开发爱帮生活、爱帮公交后台
+	<br/>IOS 开发工程师，曾开发爱帮生活、掌上租房、找室友
+	<br/>
+	<br/>新浪微博：<a href='http://weibo.com/lieyunye' target='_blank'>裂云野</a>
+	<span id="wb_follow_btn"></span>  
+</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - lieyunye -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

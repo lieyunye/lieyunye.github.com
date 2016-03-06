@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: summary | 神羲龛]]></title>
+  <link href="http://lieyunye.github.io/blog/categories/summary/atom.xml" rel="self"/>
+  <link href="http://lieyunye.github.io/"/>
+  <updated>2016-01-10T14:03:53+08:00</updated>
+  <id>http://lieyunye.github.io/</id>
+  <author>
+    <name><![CDATA[lieyunye]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[本博客的搭建]]></title>
+    <link href="http://lieyunye.github.io/blog/2013/09/02/how-to-create-blog-site/"/>
+    <updated>2013-09-02T19:44:00+08:00</updated>
+    <id>http://lieyunye.github.io/blog/2013/09/02/how-to-create-blog-site</id>
+    <content type="html"><![CDATA[<p>如果有人对git-hub + octopress的博客感兴趣的话，可以读一读下文：</p>
+
+<p>1、首先读一下以下三个链接的文章</p>
+
+<ul>
+<li><a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">象写程序一样写博客：搭建基于github的博客</a> @唐巧</li>
+<li><a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">利用Octopress搭建一个Github博客</a> @破船(BeyondVincent)</li>
+<li><a href="http://huanggang.me/archives/654">在github上使用octopress</a></li>
+</ul>
+
+
+<p>2、顺利的话，相信你已经搭建成功了，如果出了问题，可以看看下文，梳理一下：</p>
+
+<ul>
+<li><p>git</p>
+
+<p>将git安装好，有git-hub的账号,对git做一些基本配置，比如:remote.origin.url = <a href="https://github.com/username/username.github.com.git">https://github.com/username/username.github.com.git</a> ， 这样git push origin source 才不会出错</p></li>
+<li><p>安装ruby和rvm</p>
+
+<p>记得安装好相关依赖项，如 bundle</p></li>
+<li><p>安装octopress</p>
+
+<p>生成博客或者是对octopress设置 都要记得 cd your_local_octopress_directory</p></li>
+</ul>
+
+
+<h2>其他配置</h2>
+
+<ul>
+<li><p>导航栏的配置</p>
+
+<pre><code>cd source/_includes/custom
+&lt;li&gt;&lt;a href="/"&gt;首页&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/blog/archives"&gt;所有文章&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://weibo.com/lieyunye" target="_blank"&gt;我的微博&lt;/a&gt;&lt;/li&gt;
+</code></pre></li>
+<li><p>关于我</p>
+
+<pre><code>cd octopress/source/_includes/custom/asides
+&lt;h1&gt;About Me&lt;/h1&gt;
+&lt;p&gt;爱帮网(2011---2012)&lt;br/&gt;
+   九九房(2012---至今)&lt;/p&gt;
+&lt;br/&gt;Java 开发工程师，曾开发爱帮生活、爱帮公交后台
+&lt;br/&gt;IOS 开发工程师，曾开发爱帮生活、掌上租房、找室友
+&lt;br/&gt;
+&lt;br/&gt;新浪微博：&lt;a href='http://weibo.com/lieyunye' target='_blank'&gt;裂云&gt;野&lt;/a&gt;
+&lt;/p&gt;
+</code></pre>
+
+<p>参见文档：<a href="http://octopress.org/docs/theme/template">http://octopress.org/docs/theme/template</a></p></li>
+</ul>
+
+
+<p>  OK,这就是本博客的搭建过程，到此为止吧</p>
+]]></content>
+  </entry>
+  
+</feed>
