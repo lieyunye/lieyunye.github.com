@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>创建Tweak时遇到的问题及其解决方法 - 神羲龛</title>
+  <title>哀歌 - 神羲龛</title>
   <meta name="author" content="lieyunye">
 
   
-  <meta name="description" content="问题1： dpkg: status database area is locked by another process
-make: *** [internal-install] Error 2 解决办法： 重启SpringBoard即可 问题2： Undefined symbols for &hellip;">
+  <meta name="description" content="
+原作试听 曲谱地址
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ make: *** [internal-install] Error 2 解决办法： 重启SpringBoard即可 问
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lieyunye.github.io/blog/2014/04/02/some-problems-and-solutions-in-building-the-first-tweak">
+  <link rel="canonical" href="http://lieyunye.github.io/blog/2016/01/11/sad-song">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="神羲龛" type="application/atom+xml">
@@ -76,7 +77,7 @@ make: *** [internal-install] Error 2 解决办法： 重启SpringBoard即可 问
   
   <header>
     
-      <h1 class="entry-title">创建Tweak时遇到的问题及其解决方法</h1>
+      <h1 class="entry-title">哀歌</h1>
     
     
       <p class="meta">
@@ -92,55 +93,30 @@ make: *** [internal-install] Error 2 解决办法： 重启SpringBoard即可 问
   
 
 
-<time datetime="2014-04-02T13:26:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2014</time>
+<time datetime="2016-01-11T11:04:00+08:00" pubdate data-updated="true">Jan 11<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>问题1：</p>
+<div class="entry-content"><ul>
+<li><p>原作试听</p>
 
-<pre><code>dpkg: status database area is locked by another process
-make: *** [internal-install] Error 2
-</code></pre>
+<p>  <p/></p></li>
+</ul>
 
-<p>解决办法：</p>
 
-<pre><code>重启SpringBoard即可
-</code></pre>
+<center>
+<audio src="http://7xpydv.com1.z0.glb.clouddn.com/audio%2Fpiano%2F%E5%92%8C%E7%94%B0%E8%96%AB%20-%20%E5%93%80%E6%AD%8C.mp3" preload="none" />
+</center>
 
-<p>问题2：</p>
 
-<pre><code>Undefined symbols for architecture armv7:
-"_OBJC_CLASS_$_UIAlertView", referenced from:
-  objc-class-ref in Tweak.xm.e98a028e.o
-ld: symbol(s) not found for architecture armv7
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make[2]: *** [obj/iOSRE.dylib.ba964c90.unsigned] Error 1
-make[1]: *** [internal-library-all_] Error 2
-make: *** [iOSRE.all.tweak.variables] Error 2
-</code></pre>
+<p><p/></p>
 
-<p>解决方法：</p>
+<p><video width='1280' height='720' preload='none' controls poster='http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png'><source src='http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video></p>
 
-<pre><code>在MakeFile中加入  xxx_FRAMEWORKS = UIKit
-将xxx替换成你的TWEAK_NAME
-</code></pre>
-
-<p>问题3：</p>
-
-<pre><code>iosre/theos/makefiles/targets/Darwin/iphone.mk:41: Deploying to iOS 3.0 while building for 6.0 will generate armv7-only binaries.
-</code></pre>
-
-<p>解决方法：</p>
-
-<pre><code>在MakeFile中加入 ARCHS = armv7 armv7s
-</code></pre>
-
-<p>以上就是一些搜集到的解决方法，仅供参考，到此为止吧</p>
-
-<p>参考链接：<a href="http://sharedinstance.net/2013/12/how-to-support-arm64/">Important: Update your tweaks to support arm64</a></p>
+<p><a href="http://www.tan8.com/yuepu-10123.html">曲谱地址</a></p>
 </div>
 
 
@@ -163,7 +139,7 @@ make: *** [iOSRE.all.tweak.variables] Error 2
   
 
 
-<time datetime="2014-04-02T13:26:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2014</time>
+<time datetime="2016-01-11T11:04:00+08:00" pubdate data-updated="true">Jan 11<span>th</span>, 2016</time>
       
 
 
@@ -207,10 +183,8 @@ var jiathis_config = {data_track_clickback:'true'};
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/03/23/resize-view-when-statusbarframe-changed/" title="Previous Post: 解决IOS状态栏高度变化对View的影响">&laquo; 解决IOS状态栏高度变化对View的影响</a>
+        <a class="basic-alignment left" href="/blog/2014/04/02/some-problems-and-solutions-in-building-the-first-tweak/" title="Previous Post: 创建Tweak时遇到的问题及其解决方法">&laquo; 创建Tweak时遇到的问题及其解决方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/11/sad-song/" title="Next Post: 哀歌">哀歌 &raquo;</a>
       
     </p>
   </footer>

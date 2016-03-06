@@ -4,7 +4,7 @@
   <title><![CDATA[神羲龛]]></title>
   <link href="http://lieyunye.github.io/atom.xml" rel="self"/>
   <link href="http://lieyunye.github.io/"/>
-  <updated>2014-05-13T11:16:28+08:00</updated>
+  <updated>2016-01-11T13:37:02+08:00</updated>
   <id>http://lieyunye.github.io/</id>
   <author>
     <name><![CDATA[lieyunye]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[哀歌]]></title>
+    <link href="http://lieyunye.github.io/blog/2016/01/11/sad-song/"/>
+    <updated>2016-01-11T11:04:00+08:00</updated>
+    <id>http://lieyunye.github.io/blog/2016/01/11/sad-song</id>
+    <content type="html"><![CDATA[<ul>
+<li><p>原作试听</p>
+
+<p>  <p/></p></li>
+</ul>
+
+
+<center>
+<audio src="http://7xpydv.com1.z0.glb.clouddn.com/audio%2Fpiano%2F%E5%92%8C%E7%94%B0%E8%96%AB%20-%20%E5%93%80%E6%AD%8C.mp3" preload="none" />
+</center>
+
+
+<p><p/></p>
+
+<p><video width='1280' height='720' preload='none' controls poster='http://7xpydv.com1.z0.glb.clouddn.com/image%2Fpiano%2Fsad%20song.png'><source src='http://7xpydv.com1.z0.glb.clouddn.com/video%2Fpiano%2FSad%20Song.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></video></p>
+
+<p><a href="http://www.tan8.com/yuepu-10123.html">曲谱地址</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[创建Tweak时遇到的问题及其解决方法]]></title>
@@ -254,28 +279,7 @@ Storing debug log for failure in /home/vagrant/.pip/pip.log
 <p>如果遇到：</p>
 
 <pre><code>pip install pylibmc
-Downloading/unpacking pylibmc
-Downloading pylibmc-1.3.0.tar.gz (49kB): 49kB downloaded
-Storing download in cache at /home/op/.pip/cache/https%3A%2F%2Fpypi.python.org  %2Fpackages%2Fsource%2Fp%2Fpylibmc%2Fpylibmc-1.3.0.tar.gz
-Running setup.py (path:/home/op/pyServer/sites/env/yichangxi/build/pylibmc/ setup.py) egg_info for package pylibmc
-
-warning: no files found matching 'LICENSE'
-warning: no files found matching 'runtests.py'
-warning: no files found matching '*.py' under directory 'pylibmc'
-Installing collected packages: pylibmc
-Running setup.py install for pylibmc
-building '_pylibmc' extension
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -    Wstrict-prototypes -fPIC -DUSE_ZLIB -I/usr/local/include/python2.7 -c src/  _pylibmcmodule.c -o build/temp.linux-x86_64-2.7/src/_pylibmcmodule.o -fno-  strict-aliasing
-In file included from src/_pylibmcmodule.c:34:
-src/_pylibmcmodule.h:189: error: ‘MEMCACHED_BEHAVIOR_TCP_KEEPALIVE’ undeclared  here (not in a function)
-src/_pylibmcmodule.h:256: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY’     undeclared here (not in a function)
-src/_pylibmcmodule.h:256: error: initializer element is not constant
-src/_pylibmcmodule.h:256: error: (near initialization for   ‘PylibMC_distributions[3].flag’)
-src/_pylibmcmodule.h:261: error: ‘MEMCACHED_DISTRIBUTION_CONSISTENT_MAX’    undeclared here (not in a function)
-src/_pylibmcmodule.h:261: error: initializer element is not constant
-src/_pylibmcmodule.h:261: error: (near initialization for   ‘PylibMC_distributions[5].flag’)
-error: command 'gcc' failed with exit status 1
-Complete output from command /home/op/pyServer/sites/env/yichangxi/bin/python - c "import setuptools, tokenize;__file__='/home/op/pyServer/sites/env/yichangxi/ build/pylibmc/setup.py';exec(compile(getattr(tokenize, 'open', open)    (__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --record / tmp/pip-0zWJqI-record/install-record.txt --single-version-externally-managed -- compile --install-headers /home/op/pyServer/sites/env/yichangxi/include/site/   python2.7:
+python2.7:
 running install
 
 running build
@@ -628,6 +632,20 @@ Instructions: 0x00097490: CFA=4294967295+4294967295
 <h2>其他配置</h2>
 
 <ul>
+<li><p>添加音频</p>
+
+<pre><code>下载[audio.js](http://kolber.github.io/audiojs/)
+将其中的audio.min.js和player-graphics.gif拷贝到/source/javascripts目录下
+编辑/source/_includes/head.html,加入如下代码：
+&lt;script src="http://lieyunye.github.io/javascripts/audio.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+    });
+&lt;/script&gt;
+下载[Audio/MP3 Plugin for Octopress](https://gist.github.com/lieyunye/409b6c76f5d9dc4d7a5b)将其放在/plugins目录下
+最后编辑xxx.markdown 加入audio标签
+</code></pre></li>
 <li><p>导航栏的配置</p>
 
 <pre><code>cd source/_includes/custom
@@ -648,7 +666,8 @@ Instructions: 0x00097490: CFA=4294967295+4294967295
 &lt;/p&gt;
 </code></pre>
 
-<p>参见文档：<a href="http://octopress.org/docs/theme/template">http://octopress.org/docs/theme/template</a></p></li>
+<p>参见文档：<a href="http://octopress.org/docs/theme/template">http://octopress.org/docs/theme/template</a>
+<a href="http://micronarrativ.org/blog/blog/2012/09/06/wordpress-til-octopress-audio/">http://micronarrativ.org/blog/blog/2012/09/06/wordpress-til-octopress-audio/</a></p></li>
 </ul>
 
 
