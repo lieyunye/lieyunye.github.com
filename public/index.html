@@ -9,9 +9,7 @@
   <meta name="author" content="lieyunye">
 
   
-  <meta name="description" content="
-原作试听 曲谱地址
-">
+  <meta name="description" content="时间：2016-02-26 地点：公司 人物：lieyunye 起因：遇到一个需求，需要给进度条加个投影，并且进度条的首尾要有圆角。 经过：项目中用到的是UIProgressView 1、用layer来做 _videoProgressView.trackTintColor = [UIColor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +72,119 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/26/set-uiprogressview-shadow-and-radius/">UIProgressView设置shadow和radius</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-26T17:22:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>时间：2016-02-26</p>
+
+<p>地点：公司</p>
+
+<p>人物：lieyunye</p>
+
+<p>起因：遇到一个需求，需要给进度条加个投影，并且进度条的首尾要有圆角。</p>
+
+<p>经过：项目中用到的是UIProgressView</p>
+
+<p>1、用layer来做</p>
+
+<pre><code> _videoProgressView.trackTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.18];
+_videoProgressView.progressTintColor = [UIColor whiteColor];
+_videoProgressView.layer.cornerRadius = 1.5;
+_videoProgressView.layer.masksToBounds = YES;
+_videoProgressView.layer.shadowOpacity = 0.5;
+_videoProgressView.layer.shadowColor = [UIColor blackColor].CGColor;
+_videoProgressView.layer.shadowOffset = CGSizeMake(1, 1);
+</code></pre>
+
+<p>结果就是有圆角但是没有投影的效果，原因是masksToBounds=YES将投影效果取消了。</p>
+
+<p>2、用加投影的图片</p>
+
+<pre><code>[_videoProgressView setProgressImage:[UIImage imageNamed:@"videoProgressTrack1"]];
+[_videoProgressView setTrackImage:[UIImage imageNamed:@"videoProgressTrack2"]];
+_videoProgressView.layer.shadowOpacity = 0.5;
+_videoProgressView.layer.shadowColor = [UIColor blackColor].CGColor;
+_videoProgressView.layer.shadowOffset = CGSizeMake(1, 1);
+</code></pre>
+
+<p> 很抱歉，iOS8到iOS9系统上设置图片是没有效果的，要么是个蓝色条，要么什么都没有，也google了不少，貌似是UIProgressView的BUG</p>
+
+<p> 那么打印一下_videoProgressView看看他的subview都是什么情况</p>
+
+<pre><code>&lt;__NSArrayM 0x17d07ed0&gt;(
+&lt;UIImageView: 0x17fe5d30; frame = (0 0; 168 2); opaque = NO;    userInteractionEnabled = NO; layer = &lt;CALayer: 0x17d28700&gt;&gt;,
+&lt;UIImageView: 0x17fdd160; frame = (0 0; 0 2); opaque = NO;  userInteractionEnabled = NO; layer = &lt;CALayer: 0x17dcfc70&gt;&gt;
+)
+</code></pre>
+
+<p> 其中一个UIImageView的width是0！在iOS7.0.x上progressImage有时会突然消失，而这时打印上面的imageView的image为nil</p>
+
+<pre><code>UIImageView *trackImageView = _videoProgressView.subviews.firstObject;
+UIImageView *progressImageView = _videoProgressView.subviews.lastObject;
+CGRect trackProgressFrame = trackImageView.frame;
+trackProgressFrame.size.height = _videoProgressView.frame.size.height;
+trackImageView.frame = trackProgressFrame;
+progressImageView.frame = trackProgressFrame;
+progressImageView.image = progressImage;
+trackImageView.image = trackImage;
+</code></pre>
+
+<p> 那么如果将UIImageView2的width设置为UIImageView1的width，那么在iOS8和iOS9上设置图片就OK了，只是iOS7上就不好使了</p>
+
+<p>结果：</p>
+
+<p>最终的解决办法：</p>
+
+<pre><code>_videoProgressView.tintColor = [UIColor clearColor];
+_videoProgressView.trackTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.18];
+_videoProgressView.progressTintColor = [UIColor whiteColor];
+UIImageView *trackImageView = _videoProgressView.subviews.firstObject;
+UIImageView *progressImageView = _videoProgressView.subviews.lastObject;
+CGRect trackProgressFrame = trackImageView.frame;
+trackProgressFrame.size.height = _videoProgressView.frame.size.height;
+trackImageView.frame = trackProgressFrame;
+progressImageView.frame = trackProgressFrame;
+trackImageView.layer.cornerRadius = 1.5;
+trackImageView.layer.masksToBounds = YES;
+progressImageView.layer.cornerRadius = 1.5;
+progressImageView.layer.masksToBounds = YES;
+</code></pre>
+
+<p> 总之系统上如果有一个问题，那么就会折腾你好长好长时间，虽然这只是一个小小的需求&hellip;</p>
+
+<p> 到此为止吧</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -981,6 +1092,10 @@ Instructions: 0x00097490: CFA=4294967295+4294967295
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/26/set-uiprogressview-shadow-and-radius/">UIProgressView设置shadow和radius</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/11/sad-song/">哀歌</a>
       </li>
     
@@ -994,10 +1109,6 @@ Instructions: 0x00097490: CFA=4294967295+4294967295
     
       <li class="post">
         <a href="/blog/2014/02/18/build-a-python-grab-webserver/">搭建一个网页抓取服务</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/13/ios-font-icon/">在IOS应用中使用字体图标</a>
       </li>
     
   </ul>
